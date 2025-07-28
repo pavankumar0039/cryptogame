@@ -52,7 +52,7 @@ function App() {
         setMessages((prev) => [...prev, msg]);
       });
     }
-  }, []);
+  }, [player]);
 
   // Fetch wallet
   useEffect(() => {

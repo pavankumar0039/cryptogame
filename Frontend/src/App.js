@@ -4,7 +4,10 @@ import axios from 'axios';
 import { io } from 'socket.io-client';
 
 const API = 'https://cryptogame-1.onrender.com/api';
-const socket = io('https://cryptogame-1.onrender.com');
+
+const socket = io('https://your-backend-url.com', {
+  transports: ['websocket'],
+});
 
 function App() {
   const [player, setPlayer] = useState(null);
@@ -56,7 +59,10 @@ function App() {
     const fetchWallet = async () => {
       if (!player?.id) return;
       try {
-        const res = await axios.get(`${API}/game/wallet/${player.id}`);
+        const res = await axios.get(`${API}/game/wallet/${player.id}`,{
+           withCredentials: true
+          
+        });
         setWallet(res.data);
       } catch (err) {
         console.error('Failed to fetch wallet:', err);

@@ -40,7 +40,7 @@ function App() {
 
       socket.on('connect', () => {
         console.log('Connected:', socket.id);
-        socket.emit('register_player', parsed.id); // ✅ Register player ID with socket
+        socket.emit('register_player', parsed.id); 
       });
 
       socket.on('room_assigned', (room) => {
@@ -52,9 +52,9 @@ function App() {
         setMessages((prev) => [...prev, msg]);
       });
     }
-  }, [player]);
+  }, []);
 
-  // Fetch wallet
+ 
   useEffect(() => {
     const fetchWallet = async () => {
       if (!player?.id) return;

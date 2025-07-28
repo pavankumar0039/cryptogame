@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { io } from 'socket.io-client';
 
-const API = 'http://localhost:5000/api';
-const socket = io('http://localhost:5000');
+const API = 'https://cryptogame-1.onrender.com/api';
+const socket = io('https://cryptogame-1.onrender.com');
 
 function App() {
   const [player, setPlayer] = useState(null);

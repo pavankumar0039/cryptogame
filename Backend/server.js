@@ -17,8 +17,12 @@ const io = new Server(server, {
     methods: ['GET', 'POST'],
   },
 });
-
-app.use(cors());
+const allowedOrigins = ['https://cryptogame-phi.vercel.app/'];
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ['GET', 'POST'],
+  credentials: true
+}));
 app.use(express.json());
 app.use('/api/game', gameRoutes);
 

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { io } from 'socket.io-client';
 
-const API = 'https://cryptogame-1.onrender.com/api';
+const API = 'https://cryptogame-9uaa.onrender.com/api';
 
 const socket = io('https://cryptogame-1.onrender.com', {
   transports: ['websocket'],

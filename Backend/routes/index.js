@@ -169,6 +169,7 @@ router.get('/wallet/:playerId', async (req, res) => {
     let prices;
     try {
       prices = await getCryptoPrices();
+      
     } catch (err) {
       return res.status(503).json({ message: "Price data unavailable. Try again later." });
     }

@@ -166,7 +166,12 @@ router.post('/cashout', async (req, res) => {
 router.get('/wallet/:playerId', async (req, res) => {
   try {
     const player = await Player.findById(req.params.playerId);
-    const prices = await getCryptoPrices();
+    let prices;
+    try {
+      prices = await getCryptoPrices();
+    } catch (err) {
+      return res.status(503).json({ message: "Price data unavailable. Try again later." });
+    }
 
     const walletUSD = {};
     for (let coin in player.wallet) {

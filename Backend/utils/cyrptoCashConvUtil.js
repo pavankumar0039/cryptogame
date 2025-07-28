@@ -1,19 +1,29 @@
-const axios = require('axios');
+let cache = null;
+let lastFetched = 0;
+const CACHE_TTL = 60 * 1000; // 1 minute
 
-let cachedPrices = null;
-let lastFetch = 0;
+const axios = require('axios');
 
 async function getCryptoPrices() {
   const now = Date.now();
-  if (!cachedPrices || now - lastFetch > 10000) {
-    const res = await axios.get(process.env.CRYPTO_SECRET_KEY);
-    cachedPrices = {
+  if (cache && (now - lastFetched < CACHE_TTL)) {
+    return cache;
+  }
+
+  try {
+    const res = await axios.get(
+      'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd'
+    );
+    cache = {
       BTC: res.data.bitcoin.usd,
       ETH: res.data.ethereum.usd,
     };
-    lastFetch = now;
+    lastFetched = now;
+    return cache;
+  } catch (err) {
+    console.error("Error fetching crypto prices", err.message);
+    throw new Error("Rate limited by CoinGecko");
   }
-  return cachedPrices;
 }
 
 module.exports = { getCryptoPrices };

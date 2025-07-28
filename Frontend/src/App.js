@@ -5,7 +5,7 @@ import { io } from 'socket.io-client';
 
 const API = 'https://cryptogame-1.onrender.com/api';
 
-const socket = io('https://your-backend-url.com', {
+const socket = io('https://cryptogame-1.onrender.com', {
   transports: ['websocket'],
 });
 
